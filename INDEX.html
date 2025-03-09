@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input[type="date"] {
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Age Calculator</h1>
+        <label for="birthdate">Enter Your Birthdate:</label>
+        <input type="date" id="birthdate">
+        <button onclick="calculateAge()">Calculate Age</button>
+        
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function calculateAge() {
+            const birthdate = document.getElementById("birthdate").value; // Get birthdate input
+            if (!birthdate) {
+                alert("Please enter a valid birthdate.");
+                return;
+            }
+
+            const birthDate = new Date(birthdate); // Convert input value to Date object
+            const today = new Date(); // Get today's date
+            
+            let age = today.getFullYear() - birthDate.getFullYear(); // Calculate the age
+            const monthDifference = today.getMonth() - birthDate.getMonth(); // Calculate month difference
+            
+            // If the birthday hasn't occurred yet this year, subtract one year
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+
+            document.getElementById("result").innerText = `You are ${age} years old.`; // Display the result
+        }
+    </script>
+</body>
+</html>
